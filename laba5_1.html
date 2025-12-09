@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Обробка рядка</title>
+</head>
+<body>
+
+<h2>Обробка рядка</h2>
+
+<input type="text" id="inputString" placeholder="Введіть рядок">
+<button onclick="processString()">Обробити</button>
+
+<p><strong>Результат:</strong> <span id="result"></span></p>
+<p><strong>Кількість пар 'AC':</strong> <span id="countAC"></span></p>
+
+<script>
+function processString() {
+    let s = document.getElementById("inputString").value;
+    let result = "";
+
+    // Після кожної цифри вставляємо таку ж цифру
+    for (let i = 0; i < s.length; i++) {
+        result += s[i];
+        if (!isNaN(s[i]) && s[i] !== " ") {
+            result += s[i];
+        }
+    }
+
+    // Підрахунок "AC"
+    let countAC = 0;
+    for (let i = 0; i < result.length - 1; i++) {
+        if (result[i] === "A" && result[i + 1] === "C") {
+            countAC++;
+        }
+    }
+
+    document.getElementById("result").textContent = result;
+    document.getElementById("countAC").textContent = countAC;
+}
+</script>
+
+</body>
+</html>
+

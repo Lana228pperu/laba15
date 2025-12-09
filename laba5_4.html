@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Шифрування слів</title>
+</head>
+<body>
+
+<h2>Перемішування букв у словах</h2>
+
+<textarea id="inputText" rows="4" cols="50" placeholder="Введіть текст"></textarea><br><br>
+<button onclick="encrypt()">Зашифрувати</button>
+
+<p><strong>Результат:</strong></p>
+<p id="outputText"></p>
+
+<script>
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function encrypt() {
+    let text = document.getElementById("inputText").value;
+    let words = text.split(/(\s+)/); // зберігаємо пробіли
+    let result = "";
+
+    for (let word of words) {
+        // працюємо тільки зі словами довші за 3 символи
+        if (word.length > 3 && /^[A-Za-zА-Яа-яІіЇїЄєҐґ]+$/.test(word)) {
+            let middle = word.slice(1, -1).split("");
+            shuffleArray(middle);
+            result += word[0] + middle.join("") + word[word.length - 1];
+        } else {
+            result += word;
+        }
+    }
+
+    document.getElementById("outputText").textContent = result;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Обробка тексту</title>
+</head>
+<body>
+
+<h2>Обробка рядка</h2>
+
+<input type="text" id="inputText" placeholder="Введіть текст" size="50">
+<button onclick="processText()">Обробити</button>
+
+<p><strong>Оновлений текст:</strong> <span id="result"></span></p>
+<p><strong>Кількість слів довжиною більше 5:</strong> <span id="count"></span></p>
+
+<script>
+function processText() {
+    let text = document.getElementById("inputText").value.trim();
+
+    // Розбиваємо текст на слова
+    let words = text.split(/\s+/);
+
+    // 1. Підрахунок слів довжиною більше 5
+    let count = 0;
+    for (let word of words) {
+        if (word.length > 5) {
+            count++;
+        }
+    }
+
+    // 2. Видалення пробілів між першим і другим словом
+    if (words.length >= 2) {
+        words[0] = words[0] + words[1];
+        words.splice(1, 1);
+    }
+
+    let resultText = words.join(" ");
+
+    document.getElementById("result").textContent = resultText;
+    document.getElementById("count").textContent = count;
+}
+</script>
+
+</body>
+</html>

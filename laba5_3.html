@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Просте шифрування</title>
+</head>
+<body>
+
+<h2>Програма шифрування</h2>
+
+<textarea id="inputText" rows="4" cols="50" placeholder="Введіть текст"></textarea><br><br>
+<button onclick="encrypt()">Зашифрувати</button>
+
+<p><strong>Зашифрований текст:</strong></p>
+<p id="outputText"></p>
+
+<script>
+function encrypt() {
+    const alphabet = "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя";
+    let text = document.getElementById("inputText").value;
+    let result = "";
+
+    for (let char of text) {
+        let index = alphabet.indexOf(char.toLowerCase());
+
+        if (index !== -1) {
+            // наступна літера (я → а)
+            let nextChar = alphabet[(index + 1) % alphabet.length];
+
+            // зберігаємо регістр
+            result += (char === char.toUpperCase()) ? nextChar.toUpperCase() : nextChar;
+        } else {
+            // якщо не літера — залишаємо як є
+            result += char;
+        }
+    }
+
+    document.getElementById("outputText").textContent = result;
+}
+</script>
+
+</body>
+</html>
